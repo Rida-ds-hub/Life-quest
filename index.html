@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFEQUEST</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    :root {
+        /* CSS HEX */
+        --orange-peel: #ff9f1cff;
+        --hunyadi-yellow: #ffbf69ff;
+        --white: #ffffffff;
+        --mint-green: #cbf3f0ff;
+        --light-sea-green: #2ec4b6ff;
+
+        /* Additional Colors */
+        --dark-gray: #333333;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--mint-green);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        text-align: center;
+        background-color: var(--white);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        font-size: 36px;
+        color: var(--orange-peel); /* Changed color for LIFEQUEST */
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 16px;
+        color: var(--dark-gray); /* Darkened color for other text */
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+    button {
+        background-color: var(--orange-peel);
+        color: var(--white);
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: var(--hunyadi-yellow);
+    }
+    a {
+        text-decoration: none;
+        color: var(--light-sea-green);
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>LIFEQUEST</h1>
+        <p>Your personal manager</p>
+        <p>At LifeQuest, we're all about helping you level up in every aspect of your life! Whether you're crushing it in school, climbing the career ladder, or just want to be your best self, we've got your back. Our mission? To make personal growth fun, easy, and oh-so-rewarding. Set goals, smash them, and watch your progress soar! Ready to join the adventure? Let's make life awesome, together!</p>
+        <a href="/signin"><button>Sign In</button></a>
+        <p>Don't have an account? <a href="/signup">Register!</a></p>
+    </div>
+</body>
+</html>

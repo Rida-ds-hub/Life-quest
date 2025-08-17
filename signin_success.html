@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS variables */
+        :root {
+            --orange-peel: #ff9f1cff;
+            --hunyadi-yellow: #ffbf69ff;
+            --white: #ffffffff;
+            --mint-green: #cbf3f0ff;
+            --light-sea-green: #2ec4b6ff;
+            --dark-gray: #333333;
+            --light-gray: #cccccc;
+        }
+
+        /* Page styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--mint-green);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            color: var(--dark-gray);
+            position: relative; /* Added for positioning the sign-out button */
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            color: var(--orange-peel);
+            margin-top: 20px;
+        }
+        .subtext {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .button {
+            background-color: var(--orange-peel);
+            color: var(--white);
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        /* Sign-out button styling */
+        .signout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--light-sea-green);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sign-out button -->
+   <button class="signout-button" onclick="logout()">Sign Out</button>
+
+    <div class="container">
+        <h1>Welcome, {{ username }}!</h1>
+        <p class="subtext">It's time to take back the reigns of your life. Let's explore our milestones!</p>
+        <div class="button-container">
+            <a href="/personal_milestones" class="button">Personal Milestones</a>
+            <a href="/academic_milestones" class="button">Academic Milestones</a>
+            <a href="/professional_milestones" class="button">Professional Milestones</a>
+        </div>
+    </div>
+</body>
+    
+    
+    <script>
+    function logout() {
+        // Send a request to clear the session (you need to implement this in your Flask backend)
+        fetch('/logout', {
+            method: 'POST'  // You can use POST or GET method depending on your backend implementation
+        })
+        .then(response => {
+            // Once the session is cleared, redirect the user to the sign-in page
+            window.location.href = '/signin';  // Replace '/signin' with the actual URL of your sign-in page
+        })
+        .catch(error => {
+            console.error('Error logging out:', error);
+        });
+    }
+</script>
+</html>

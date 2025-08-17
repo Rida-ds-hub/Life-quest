@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Milestones</title>
+    <!-- Include Plotly.js library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS variables */
+        :root {
+            --orange-peel: #ff9f1cff;
+            --hunyadi-yellow: #ffbf69ff;
+            --white: #ffffffff;
+            --mint-green: #cbf3f0ff;
+            --light-sea-green: #2ec4b6ff;
+            --dark-gray: #333333;
+            --light-gray: #cccccc;
+        }
+
+        /* Page styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--mint-green);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            color: var(--dark-gray);
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--orange-peel);
+            margin-bottom: 20px; /* Add margin at the bottom for spacing */
+        }
+        h2 {
+           color: var(--light-sea-green)
+        }
+        p {
+            margin: 10px 0;
+        }
+        .plot-container {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%; /* Adjust max-width to allow more space for the plots */
+            box-sizing: border-box;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+           
+    </style>
+</head>
+<body>
+   <button class="back-button" onclick="window.location.href='/signin_success'">Back</button>
+    <h1>Your Academic Milestones</h1>
+    <div class="container">
+        <!-- Display academic data -->
+        {% for subject_data in academic_data %}
+        <div class="card">
+            <h2>{{ subject_data.Subject }}</h2>
+            <p>Overall Grade: {{ subject_data.Overall_Grade }}</p>
+        </div>
+        {% endfor %}
+    </div>
+  <div style="display: flex;">
+        <!-- Plotly histogram div -->
+        <div style="flex: 1; padding: 20px;">
+          
+            {{ histogram_html | safe }}
+        </div>
+        <!-- Plotly boxplot div -->
+        <div style="flex: 1; padding: 20px;">
+           
+            {{ boxplot_html | safe }}
+        </div>
+    </div>
+</body>
+</html>

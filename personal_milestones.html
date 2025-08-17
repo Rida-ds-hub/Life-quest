@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Milestones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+ /* CSS variables */
+:root {
+    --orange-peel: #ff9f1cff;
+    --hunyadi-yellow: #ffbf69ff;
+    --white: #ffffffff;
+    --mint-green: #cbf3f0ff;
+    --light-sea-green: #2ec4b6ff;
+    --dark-gray: #333333;
+    --light-gray: #cccccc;
+}
+
+/* Page styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--mint-green);
+    margin: 0;
+    padding: 0;
+    color: var(--dark-gray);
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    font-size: 28px;
+    color: var(--orange-peel);
+    margin-top: 20px;
+    text-align: center;
+}
+h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    color: var(--light-sea-green);
+}
+.milestone-container {
+    margin-top: 20px;
+}
+.milestone-description {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+/* Table container styling */
+.table-container {
+    margin-top: 4px;
+    overflow-x: auto; /* Add horizontal scroll if needed */
+    max-height: 200px; /* Adjust the height as needed */
+    overflow-y: auto;
+    position: relative;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1px;
+    border: 0; /* Remove table border */
+    table-layout: fixed;
+}
+
+th, td {
+    border: 0; /* Remove cell borders */
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--light-sea-green);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0); /* Transparent background */
+}
+
+/* Make table headers fixed while scrolling */
+.scrollable-table {
+    table-layout: fixed;
+}
+
+.scrollable-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--light-sea-green);
+    color: var(--white);
+}
+        
+           .center-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Button style */
+        .add-button {
+            background-color: var(--orange-peel);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%
+        }
+
+        .add-button:hover {
+            background-color: var(--hunyadi-yellow);
+        }
+  
+</style>
+</head>
+<body>
+  <div class="container">
+      <button class="back-button" onclick="window.location.href='/signin_success'">Back</button>
+    <h1>Personal Milestones</h1>
+    <div class="milestone-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="5">These are all the personal milestones you're working to achieve!</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if personal_data_chunks %}
+                    {% for chunk in personal_data_chunks %}
+                        <tr>
+                            {% for item in chunk %}
+                                <td><span class="textbox">{{ item }}</span></td>
+                            {% endfor %}
+                            {% for _ in range(5 - chunk|length) %}
+                                <td></td> <!-- Add empty cells if the chunk size is less than 5 -->
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">No personal milestones found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+
+    <!-- Additional table for personal goals -->
+    <h2>Personal Goals</h2>
+    <div class="table-container">
+        <table id="goals-table" class="scrollable-table">
+            <thead>
+                <tr>
+                    <th>Goal Name</th>
+                    <th>Deadline</th>
+                    <th>Priority</th>
+                    <th>Category</th>
+                    <th>Motivation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for goal in personal_goals %}
+                    <tr>
+                        <td>{{ goal['Goal_Name'] }}</td>
+                        <td>{{ goal['Deadline'] }}</td>
+                        <td>{{ goal['Priority'] }}</td>
+                        <td>{{ goal['Category'] }}</td>
+                        <td>{{ goal['Motivation'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2>Habits</h2>
+<div class="table-container">
+    <table id="habits-table" class="scrollable-table">
+        <thead>
+            <tr>
+                <th>Habit Name</th>
+                <th>Frequency</th>
+                <th>Reminder</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for habit in habits %}
+                <tr>
+                    <td>{{ habit['Habit_Name'] }}</td>
+                    <td>{{ habit['Frequency'] }}</td>
+                    <td>{{ habit['Reminder'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+      
+      
+    <!-- Additional table for achievements -->
+<h2>Achievements</h2>
+<div class="table-container">
+    <table id="achievements-table" class="scrollable-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date Achieved</th>
+                <th>Impact</th>
+                <th>Lessons Learned</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for achievement in achievements %}
+                <tr>
+                    <td>{{ achievement['Description'] }}</td>
+                    <td>{{ achievement['Date_Achieved'] }}</td>
+                    <td>{{ achievement['Impact'] }}</td>
+                    <td>{{ achievement['Lessons_Learned'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+      <!-- Additional section for mental health entries -->
+<h2>Mental Health Entries</h2>
+<div class="table-container">
+    <table id="mental-health-entries-table" class="scrollable-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Mood</th>
+                <th>Journal Entry</th>
+                <th>Coping Strategies</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in mental_health_entries %}
+                <tr>
+                    <td>{{ entry['Date'] }}</td>
+                    <td>{{ entry['Mood'] }}</td>
+                    <td>{{ entry['Journal_Entry'] }}</td>
+                    <td>{{ entry['Coping_Strategies'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Additional section for notes -->
+<h2>Notes</h2>
+<div class="table-container">
+    <table id="notes-table" class="scrollable-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Tags</th>
+                <th>Importance</th>
+                <th>Context</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for note in notes %}
+                <tr>
+                    <td>{{ note['Title'] }}</td>
+                    <td>{{ note['Content'] }}</td>
+                    <td>{{ note['Tags'] }}</td>
+                    <td>{{ note['Importance'] }}</td>
+                    <td>{{ note['Context'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+ <div class="center-button">
+            <button class="add-button" onclick="window.location.href='/personal_forms'">Add Entries!</button>
+        </div>
+      
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #cbf3f0ff;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff9f1cff;
+            text-align: center;
+        }
+        h2 {
+            color: #2ec4b6ff; /* Change the color for h2 elements */
+            text-align: left;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+        }
+        button[type="submit"] {
+            background-color: #ff9f1cff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block; /* Make the submit button a block element */
+            margin-top: 10px; /* Add some margin to separate it from the fields */
+        }
+        button[type="submit"]:hover {
+            background-color: #ffbf69ff;
+        }
+   .view-button {
+    width: 100%; /* Set the width to 100% */
+    background-color:  #2ec4b6ff;
+    color: #ffffff;
+    padding: 15px 0; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px; /* Add some top margin for spacing */
+}
+
+.view-button:hover {
+    background-color:  #1e9a8cff;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Entries</h1>
+        
+           <button class="view-button" onclick="window.location.href='/personal_milestones'">View Milestones</button>
+        
+        <!-- Form for adding a new goal -->
+        <form action="/submit_goal" method="post">
+            <h2>Add New Goal</h2>
+            <label for="goal_name">Goal Name:</label>
+            <input type="text" id="goal_name" name="goal_name" required>
+            <label for="deadline">Deadline:</label>
+            <input type="date" id="deadline" name="deadline" required>
+            <label for="priority">Priority:</label>
+    <select id="priority" name="priority" required>
+        {% for priority in priorities %}
+        <option value="{{ priority }}">{{ priority }}</option>
+        {% endfor %}
+    </select>
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for item in categories %}
+                <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select>
+            <label for="motivation">Motivation:</label>
+            <textarea id="motivation" name="motivation" rows="4" required></textarea>
+            <button type="submit">Submit Goal</button>
+        </form>
+ <!-- Message indicating under development -->
+        <div class="under-development">
+            <p>The rest of the form is under development. Thank you for your patience!</p>
+        </div>
+ 
+    </div>
+</body>
+</html>
